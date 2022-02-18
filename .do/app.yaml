@@ -1,0 +1,25 @@
+name: sample-mqtt
+workers:
+- name: worker
+  github:
+    repo: gregmankes/sample-mqtt
+    branch: master
+  envs:
+  - key: BROKER
+    value: "tcp://broker:1883"
+    scope: RUN_TIME
+  - key: TOPIC
+    value: "sample-mqtt"
+    scope: RUN_TIME
+  - key: CLIENT_ID
+    value: "worker"
+    scope: RUN_TIME
+services:
+- name: broker
+  github:
+    repo: gregmankes/sample-mqtt
+    branch: master
+  dockerfile_path: Dockerfile
+  http_port: 9001
+  internal_ports:
+    - 1883
